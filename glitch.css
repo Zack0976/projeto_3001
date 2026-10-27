@@ -1,0 +1,141 @@
+/* (mantém o conteúdo anterior: blink, fadeIn, subir, subirSumir, pulse,
+   tremorAnim, flashOut, glitchAnim, scanlines, vinheta, ruído SVG,
+   .tremor, .glitch, .flash, prefers-reduced-motion) */
+
+@keyframes blink        { 50% { opacity: 0; } }
+@keyframes fadeIn       { to { opacity: 1; } }
+@keyframes subir        { from { transform: translateY(60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes subirSumir   { to { transform: translateY(-40px); opacity: 0; } }
+@keyframes pulse        { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes tremorAnim {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, -2px); }
+  80% { transform: translate(1px, 2px); }
+}
+@keyframes flashOut     { from { opacity: 0.92; } to { opacity: 0; } }
+@keyframes glitchAnim {
+  0%   { text-shadow: 2px 0 #ff003c, -2px 0 #00d4ff; transform: translate(0, 0); }
+  20%  { text-shadow: -2px 0 #ff003c, 2px 0 #00d4ff; transform: translate(-1px, 1px); }
+  40%  { text-shadow: 2px 0 #ff003c, -2px 0 #00d4ff; transform: translate(1px, -1px); }
+  60%  { text-shadow: -2px 0 #ff003c, 2px 0 #00d4ff; transform: translate(-1px, -1px); }
+  80%  { text-shadow: 2px 0 #ff003c, -2px 0 #00d4ff; transform: translate(1px, 1px); }
+  100% { text-shadow: none; transform: translate(0, 0); }
+}
+
+/* ... scanlines, vinheta, ruído SVG, .tremor, .glitch, .flash (inalterados) ... */
+
+.tremor  { animation: tremorAnim 60ms infinite; }
+.glitch  { animation: glitchAnim 200ms 2; }
+.flash {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  animation: flashOut 200ms forwards;
+}
+
+/* ─── Novo (Grok) — micro-momento 1: blackout ─── */
+.blackout {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  z-index: 45;
+  pointer-events: none;
+}
+
+/* ─── Novo (Grok) — micro-momento 2: notificação falsa ─── */
+.notif-falsa {
+  position: absolute;
+  top: calc(12px + env(safe-area-inset-top));
+  left: 10px;
+  right: 10px;
+  background: #141414;
+  border: 1px solid var(--azul);
+  border-left: 3px solid var(--ciano);
+  padding: 12px 14px;
+  font-size: 12px;
+  color: var(--texto);
+  z-index: 60;
+  animation: notifDesce 300ms ease-out;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.7);
+}
+.notif-falsa.saindo {
+  animation: notifSai 400ms ease-in forwards;
+}
+.notif-falsa .notif-titulo {
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--ciano);
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.notif-falsa .notif-corpo {
+  font-size: 12px;
+  color: var(--texto);
+}
+.notif-falsa .notif-acoes {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.notif-falsa button {
+  flex: 1;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid var(--apagado);
+  color: var(--texto);
+  font-family: var(--mono);
+  font-size: 11px;
+  cursor: pointer;
+  min-height: 40px;
+}
+.notif-falsa button[data-acao="instalar"] {
+  border-color: var(--ciano);
+  color: var(--ciano);
+}
+.notif-falsa button:hover {
+  background: rgba(10, 132, 255, 0.08);
+}
+
+@keyframes notifDesce {
+  from { transform: translateY(-140%); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+@keyframes notifSai {
+  to { transform: translateY(-140%); opacity: 0; }
+}
+
+/* ─── Novo (Grok) — micro-momento 3: cursor fantasma ─── */
+.cursor-fantasma {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+  color: var(--ciano);
+  animation: blink 530ms steps(1) infinite;
+  z-index: 50;
+  pointer-events: none;
+  transition: transform 400ms ease, opacity 400ms ease;
+  text-shadow: 0 0 12px var(--ciano);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .tremor, .glitch, .cursor-fantasma { animation: none !important; }
+  .palco::before, .palco::after { opacity: 0.15; }
+  .notif-falsa, .blackout, .cursor-fantasma { display: none !important; }
+}
+body.reduzido .tremor,
+body.reduzido .glitch,
+body.reduzido .cursor-fantasma { animation: none !important; }
+body.reduzido .palco::before,
+body.reduzido .palco::after { opacity: 0.15; }
+body.reduzido .notif-falsa,
+body.reduzido .blackout,
+body.reduzido .cursor-fantasma { display: none !important; }

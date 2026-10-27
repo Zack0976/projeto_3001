@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="robots" content="noindex">
+  <title>PROJETO 3001</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/atos.css">
+  <link rel="stylesheet" href="css/glitch.css">
+</head>
+<body data-estado="BOOT">
+  <main class="palco" role="main">
+
+    <!-- ATO 0 — Portão -->
+    <section id="portao" class="ato" aria-label="Portão"></section>
+
+    <!-- ATO 1 — Invasão: terminal + barra + contador -->
+    <section id="terminal" class="ato" aria-hidden="true">
+      <div id="linhas"></div>
+      <div id="barra" class="barra"><div id="barra-fill"></div></div>
+      <div id="contador"></div>
+    </section>
+
+    <!-- ATO 1 — Títulos gigantes (OLÁ, EU JÁ SEI..., AGORA...) -->
+    <section id="titulo" class="ato" aria-live="polite"></section>
+
+    <!-- ATO 2 — Revelação -->
+    <section id="revelacao" class="ato"></section>
+
+    <!-- ATO 3 — Checklist -->
+    <section id="checklist" class="ato"></section>
+
+    <!-- ATO 3 — Mensagem final -->
+    <section id="final" class="ato"></section>
+
+    <!-- Legenda sempre visível durante falas -->
+    <p id="legenda" aria-live="polite"></p>
+
+    <!-- Botão sair (visível só no Ato 1) -->
+    <button id="sair" class="botao-sair" aria-label="Sair da simulação">sair</button>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

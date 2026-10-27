@@ -1,0 +1,323 @@
+/* ───── ATO 0 — Portão ───── */
+#portao {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+#portao h1 {
+  font-family: var(--titulo);
+  font-weight: 700;
+  font-size: clamp(28px, 7vw, 42px);
+  color: var(--azul);
+  letter-spacing: 2px;
+}
+#portao .sub { color: var(--texto); font-size: 14px; }
+#portao .dica { color: var(--apagado); font-size: 12px; }
+#portao .aviso {
+  color: var(--apagado);
+  font-size: 11px;
+  margin-top: 24px;
+  max-width: 92%;
+  line-height: 1.5;
+}
+#portao .iniciar {
+  margin-top: 20px;
+  padding: 16px 32px;
+  border: 1px solid var(--ciano);
+  background: transparent;
+  color: var(--ciano);
+  font-family: var(--mono);
+  font-size: 15px;
+  letter-spacing: 3px;
+  cursor: pointer;
+  min-height: 48px;
+  transition: background 200ms;
+}
+#portao .iniciar:hover, #portao .iniciar:focus-visible {
+  background: rgba(0, 212, 255, 0.1);
+  outline: none;
+}
+#portao .sem-efeitos {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--apagado);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 8px;
+}
+
+/* ───── ATO 1 — Terminal ───── */
+#terminal {
+  justify-content: flex-start;
+  padding-top: max(15vh, 80px);
+  gap: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ciano);
+}
+#terminal #linhas {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 40vh;
+}
+#terminal .linha {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+#terminal .linha.destaque {
+  color: var(--texto);
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-top: 6px;
+}
+#terminal .barra {
+  margin-top: 14px;
+  height: 14px;
+  border: 1px solid var(--azul);
+  display: none;
+}
+#terminal .barra.ativa { display: block; }
+#terminal #barra-fill {
+  height: 100%;
+  background: var(--azul);
+  width: 0%;
+}
+#terminal #contador {
+  margin-top: 22px;
+  font-size: 18px;
+  color: var(--texto);
+  letter-spacing: 2px;
+  display: none;
+}
+#terminal #contador.ativa { display: block; }
+#terminal #contador.travado {
+  color: var(--ciano);
+  animation: pulse 400ms infinite;
+}
+
+/* ───── ATO 1 — Título gigante ───── */
+#titulo {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  pointer-events: none;
+}
+#titulo .gigante {
+  font-family: var(--titulo);
+  font-weight: 700;
+  font-size: clamp(34px, 9vw, 60px);
+  color: var(--texto);
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+/* ───── ATO 2 — Revelação ───── */
+#revelacao {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 120px;
+  gap: 16px;
+  overflow-y: auto;
+}
+#revelacao .conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  align-items: center;
+}
+#revelacao .linha {
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 92%;
+  opacity: 0;
+  animation: fadeIn 600ms forwards;
+}
+#revelacao .calma {
+  font-family: var(--titulo);
+  font-weight: 700;
+  font-size: clamp(32px, 8vw, 48px);
+  letter-spacing: 2px;
+  color: var(--texto);
+}
+#revelacao .calma.sai {
+  animation: subirSumir 600ms forwards;
+}
+#revelacao .painel {
+  border: 1px solid var(--apagado);
+  padding: 14px;
+  font-size: 11px;
+  text-align: left;
+  color: var(--texto);
+  width: 90%;
+  animation: subir 600ms ease-out;
+}
+#revelacao .painel h3 {
+  color: var(--ciano);
+  font-size: 11px;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+#revelacao .painel pre {
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.6;
+  color: var(--texto);
+  white-space: pre;
+}
+#revelacao .painel .nota {
+  margin-top: 10px;
+  color: var(--apagado);
+  font-size: 10px;
+  line-height: 1.4;
+}
+#revelacao .continuar {
+  position: absolute;
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 28px;
+  border: 1px solid var(--ciano);
+  background: rgba(0, 212, 255, 0.06);
+  color: var(--ciano);
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  min-height: 48px;
+  animation: pulse 1.4s infinite;
+}
+
+/* ───── ATO 3 — Checklist ───── */
+#checklist {
+  padding-top: max(20px, env(safe-area-inset-top));
+  gap: 10px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+#checklist .topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--ciano);
+  letter-spacing: 1px;
+  padding: 8px 0;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 2;
+  gap: 10px;
+}
+#checklist .topo h2 {
+  font-family: var(--titulo);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--texto);
+}
+#checklist .item {
+  text-align: left;
+  background: transparent;
+  border: 1px solid var(--apagado);
+  color: var(--texto);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.4;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: border-color 200ms, background 200ms;
+  min-height: 48px;
+  display: block;
+  width: 100%;
+}
+#checklist .item:hover, #checklist .item:focus-visible {
+  border-color: var(--azul);
+  background: rgba(10, 132, 255, 0.05);
+  outline: none;
+}
+#checklist .item .marca {
+  color: var(--apagado);
+  margin-right: 8px;
+  font-weight: 700;
+}
+#checklist .item.marcado {
+  border-color: var(--ciano);
+  background: rgba(0, 212, 255, 0.05);
+  cursor: default;
+}
+#checklist .item.marcado .marca { color: var(--ciano); }
+#checklist .item .revelacao {
+  display: block;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--apagado);
+  font-size: 11px;
+  color: var(--ciano);
+  font-style: italic;
+  line-height: 1.5;
+}
+#checklist .ver-final {
+  margin: 20px auto 40px;
+  color: var(--apagado);
+  font-size: 12px;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 12px;
+  display: block;
+}
+#checklist .ver-final.oculto { display: none; }
+
+/* ───── ATO 3 — Mensagem final ───── */
+#final {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  padding-bottom: 60px;
+}
+#final .linha {
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 92%;
+  opacity: 0;
+  animation: fadeIn 700ms forwards;
+}
+#final .marca-final {
+  font-family: var(--titulo);
+  font-weight: 700;
+  font-size: clamp(20px, 6vw, 28px);
+  letter-spacing: 2px;
+  color: var(--ciano);
+  margin-top: 16px;
+  line-height: 1.3;
+}
+#final .marca-final .sub {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--apagado);
+  letter-spacing: 3px;
+  margin-top: 10px;
+  font-weight: normal;
+}
+#final .rever {
+  margin-top: 20px;
+  padding: 14px 28px;
+  border: 1px solid var(--ciano);
+  background: transparent;
+  color: var(--ciano);
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  min-height: 48px;
+}
+#final .rever:hover { background: rgba(0, 212, 255, 0.1); }
